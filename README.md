@@ -7,6 +7,9 @@ The module allows to generate URL based on server-side defined routes.
 ## Setup
 
 Place module in /modules/ and include the call in your bootstrap.
+Also, you need to include jquery plugin, like this:
+
+    <script type="text/javascript" src="/media/js/jquery.kohana.router-0.1.js"></script>
 
 ## Usage Example
 
