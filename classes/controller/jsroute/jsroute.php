@@ -55,12 +55,12 @@ abstract class Controller_JSRoute_JSRoute extends Controller {
      *
      * @return mixed 
      */
-	public function after()
-	{
+    public function after()
+    {
         $this->response->headers('Content-Type', 'application/json');
         $this->response->body(json_encode($this->json));
-        
+
         return parent::after();
-	}
+    }
     
 } // End JSRoute Controller
