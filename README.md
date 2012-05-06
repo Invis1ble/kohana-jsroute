@@ -14,9 +14,9 @@ Place module in /modules/ and include the call in your bootstrap.
 
     $.kohanaRouter({onload: function(router) {
         console.log(
-            router.get('media').uri(file: 'img/logo.png'),
-            router.url('media', {file: 'img/logo.png'}),
-            router.url('media', {file: 'img/logo.png'}, true)
+            router.get('media').uri({file: 'img/logo.png'}),  // media/img/logo.png
+            router.url('media', {file: 'img/logo.png'}),      // /media/img/logo.png
+            router.url('media', {file: 'img/logo.png'}, true) // http://domain.com/media/img/logo.png
         );
     }});
 
