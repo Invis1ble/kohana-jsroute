@@ -29,7 +29,7 @@ It is assumed that on the server the route is set
             'file' => '.+',
         ))
         ->defaults(array(
-            'controller' => 'catalog',
-            'action'     => 'media',
+            'controller' => 'foo',
+            'action'     => 'bar',
             'file'       => null,
         ));
