@@ -45,15 +45,13 @@ For example, if you have `admin` route
             'action'     => 'bat',
         ));
 
-add to blacklist it in [config][config] of the module
+add to blacklist it in [config](https://github.com/Invis1ble/kohana-jsroute/blob/master/config/jsroute.php) of the module
 
 	'filter' => array(
         // ...
         'admin', // crackers no need to know this :)
         // ...
     ),
-
-[config]: [https://github.com/Invis1ble/kohana-jsroute/blob/master/config/jsroute.php]
 
 ### License
 
