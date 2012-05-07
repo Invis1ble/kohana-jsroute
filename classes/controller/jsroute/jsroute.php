@@ -23,19 +23,6 @@ abstract class Controller_JSRoute_JSRoute extends Controller {
     public $json = array();
     
     /**
-     * Configuration of the module
-     * 
-     * @access  protected
-     * @var     object     Kohana_Config_Group
-     */
-    protected $_config;
-    
-    public function before()
-    {
-        $this->_config = Kohana::$config->load('jsroute');
-    }
-    
-    /**
      * All routes
      * 
      * @return void 
@@ -57,13 +44,10 @@ abstract class Controller_JSRoute_JSRoute extends Controller {
         
         foreach ($routes as $name => $route)
         {
-            if (!in_array($name, $this->_config['filter']))
-            {
-                $this->json['routes'][$name] = array(
-                    '_uri'      => JSRoute::get_uri($route),
-                    '_defaults' => $route->defaults(),
-                );
-            }
+            $this->json['routes'][$name] = array(
+                '_uri'      => JSRoute::get_uri($route),
+                '_defaults' => $route->defaults(),
+            );
         }
     }
     
