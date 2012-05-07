@@ -53,7 +53,8 @@ add to blacklist it in [config][config] of the module
         // ...
     ),
 
+[config]: [https://github.com/Invis1ble/kohana-jsroute/blob/master/config/jsroute.php]
+
 ### License
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
-[config][https://github.com/Invis1ble/kohana-jsroute/blob/master/config/jsroute.php]
