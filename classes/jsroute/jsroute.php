@@ -19,14 +19,21 @@ abstract class JSRoute_JSRoute extends Route {
      * 
      * @access  public
      * @static
-     * @param   Route  $route route
-     * @return  string 
+     * @param   Route   $route  route
+     * @return  string  uri of the route
      */
     public static function get_uri(Route $route)
     {
         return $route->_uri;
     }
     
+    /**
+     * Retrieves all named routes.
+     * 
+     * @access  public
+     * @static
+     * @return  array routes by name
+     */
     public static function all()
     {
         return array_diff_key(parent::all(), array_flip(Kohana::$config->load('jsroute.filter')));
