@@ -45,7 +45,7 @@ For example, if you have `admin` route
             'action'     => 'bat',
         ));
 
-add to blacklist it in config of the module (see `config/jsroute.php`)
+add to blacklist it in [config][config] of the module
 
 	'filter' => array(
         // ...
@@ -56,3 +56,4 @@ add to blacklist it in config of the module (see `config/jsroute.php`)
 ### License
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
+[config][https://github.com/Invis1ble/kohana-jsroute/blob/master/config/jsroute.php]
