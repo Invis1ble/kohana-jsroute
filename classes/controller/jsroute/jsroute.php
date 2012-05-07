@@ -3,13 +3,13 @@
 /**
  * JSRoute Controller
  * 
- * @package    JSRoute
- * @subpackage Classes/Controller
- * @author     Max Invis1ble
- * @copyright  Copyright (c) <2012> <Max Invis1ble>
- * @version    0.1
- * @since      2012-05-04 14:40:27
- * @license    http://www.opensource.org/licenses/mit-license.php MIT
+ * @package     JSRoute
+ * @subpackage  Classes/Controller
+ * @author      Max Invis1ble
+ * @copyright   Copyright (c) <2012> <Max Invis1ble>
+ * @version     0.2
+ * @since       2012-05-04 14:40:27
+ * @license     http://www.opensource.org/licenses/mit-license.php MIT
  * @abstract
  */
 abstract class Controller_JSRoute_JSRoute extends Controller {
@@ -17,9 +17,23 @@ abstract class Controller_JSRoute_JSRoute extends Controller {
     /**
      * Response body
      *
-     * @var array 
+     * @access public
+     * @var    array 
      */
     public $json = array();
+    
+    /**
+     * Configuration of the module
+     * 
+     * @access  protected
+     * @var     object     Kohana_Config_Group
+     */
+    protected $_config;
+    
+    public function before()
+    {
+        $this->_config = Kohana::$config->load('jsroute');
+    }
     
     /**
      * All routes
@@ -43,10 +57,13 @@ abstract class Controller_JSRoute_JSRoute extends Controller {
         
         foreach ($routes as $name => $route)
         {
-            $this->json['routes'][$name] = array(
-                '_uri'      => JSRoute::get_uri($route),
-                '_defaults' => $route->defaults(),
-            );
+            if (!in_array($name, $this->_config['filter']))
+            {
+                $this->json['routes'][$name] = array(
+                    '_uri'      => JSRoute::get_uri($route),
+                    '_defaults' => $route->defaults(),
+                );
+            }
         }
     }
     

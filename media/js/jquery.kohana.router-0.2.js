@@ -130,7 +130,7 @@
         self.get = function(name) {
             if (loaded) {
                 if (routes[name]) return routes[name];
-                self._error('The requested route does not exist: ' + name);
+                self._error('The requested route is unknown: ' + name);
             }
             self._error('Method "get" could not be called until routes load');
         }
