@@ -3,13 +3,13 @@
 /**
  * JSRoute
  * 
- * @package    JSRoute
- * @subpackage Classes
- * @author     Max Invis1ble
- * @copyright  Copyright (c) <2012> <Max Invis1ble>
- * @version    0.1
- * @since      2012-05-04 14:43:45
- * @license    http://www.opensource.org/licenses/mit-license.php MIT
+ * @package     JSRoute
+ * @subpackage  Classes
+ * @author      Max Invis1ble
+ * @copyright   Copyright (c) <2012> <Max Invis1ble>
+ * @version     0.2
+ * @since       2012-05-04 14:43:45
+ * @license     http://www.opensource.org/licenses/mit-license.php MIT
  * @abstract
  */
 abstract class JSRoute_JSRoute extends Route {
@@ -28,15 +28,41 @@ abstract class JSRoute_JSRoute extends Route {
     }
     
     /**
-     * Retrieves all named routes.
+     * Retrieves all named routes, except filtrated.
      * 
      * @access  public
      * @static
-     * @return  array routes by name
+     * @return  array  routes by name
      */
     public static function all()
     {
-        return array_diff_key(parent::all(), array_flip(Kohana::$config->load('jsroute.filter')));
+        return JSRoute::_filter(parent::all());
+    }
+    
+    /**
+     * Retrieves specified named routes, except filtrated.
+     * 
+     * @access  public
+     * @static
+     * @param   array  $list  Specified routes
+     * @return  array  routes by name
+     */
+    public static function specified(array $list)
+    {
+        return array_intersect_key(JSRoute::all(), array_flip($list));
+    }
+    
+    /**
+     * Filters routes by configuration setting
+     * 
+     * @access  protected
+     * @static
+     * @param   array  $routes  Routes that will be filtered
+     * @return  array  filtrated routes
+     */
+    protected static function _filter(array $routes)
+    {
+        return array_diff_key($routes, array_flip(Kohana::$config->load('jsroute.filter')));
     }
     
 } // End JSRoute

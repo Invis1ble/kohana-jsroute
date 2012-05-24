@@ -7,7 +7,7 @@
  * @subpackage  Classes/Controller
  * @author      Max Invis1ble
  * @copyright   Copyright (c) <2012> <Max Invis1ble>
- * @version     0.2
+ * @version     0.4
  * @since       2012-05-04 14:40:27
  * @license     http://www.opensource.org/licenses/mit-license.php MIT
  * @abstract
@@ -17,36 +17,43 @@ abstract class Controller_JSRoute_JSRoute extends Controller {
     /**
      * Response body
      *
-     * @access public
-     * @var    array 
+     * @access  public
+     * @var     array 
      */
     public $json = array();
     
     /**
-     * All routes
+     * Retrieves routes
      * 
-     * @return void 
+     * @return  void 
      */
-    public function action_all()
+    public function action_get()
     {
         $this->json = array(
-            'base_url'         => Kohana::$base_url,
-            'index_file'       => Kohana::$index_file,
-            'default_protocol' => JSRoute::$default_protocol,
-            'localhosts'       => JSRoute::$localhosts,
-            'routes'           => array(),
+            'base'       => Kohana::$base_url,
+            'index'      => Kohana::$index_file,
+            'protocol'   => JSRoute::$default_protocol,
+            'localhosts' => JSRoute::$localhosts,
+            'routes'     => array(),
             
             /** @todo more complex prepare regex for javascript (e.g. implement lookbehind assertions) */
-            'REGEX_KEY'        => preg_replace('#(?<!\\\)(\?|\*|\+|\{\d+,\s*?\d+\})\+#', '$1', JSRoute::REGEX_KEY), // replace "possessive" quantifiers
+            'key'        => preg_replace('#(?<!\\\)(\?|\*|\+|\{\d+,\s*?\d+\})\+#', '$1', JSRoute::REGEX_KEY), // replace "possessive" quantifiers
         );
         
-        $routes = JSRoute::all();
+        if ($this->request->method() === Request::POST)
+        {
+            $routes = JSRoute::specified(Arr::get($this->request->post(), 'list', array()));
+        }
+        else
+        {
+            $routes = JSRoute::all();
+        }
         
         foreach ($routes as $name => $route)
         {
             $this->json['routes'][$name] = array(
-                '_uri'      => JSRoute::get_uri($route),
-                '_defaults' => $route->defaults(),
+                'uri'      => JSRoute::get_uri($route),
+                'defaults' => $route->defaults(),
             );
         }
     }
@@ -54,7 +61,7 @@ abstract class Controller_JSRoute_JSRoute extends Controller {
     /**
      * Sets response headers and body
      *
-     * @return mixed 
+     * @return  mixed 
      */
     public function after()
     {
